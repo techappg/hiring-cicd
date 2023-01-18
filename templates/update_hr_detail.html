@@ -1,0 +1,85 @@
+
+<!DOCTYPE html>
+<html lang="en">
+{% load static%}
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    {% include 'css_file.html' %}
+</head>
+
+<body class="app sidebar-mini ltr light-mode">
+    <!--Sidebar start-->
+    {% include 'side_bar.html' %}
+
+    <div class="page-header">
+       <h1 class="page-title">update record </h1>
+       <div>
+          <ol class="breadcrumb">
+             <li class="breadcrumb-item"><a href="/dashboard_index">Home</a></li>
+             <li class="breadcrumb-item active" aria-current="page">update</li>
+          </ol>
+       </div>
+    </div>
+
+
+    <div class="main-container">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Update HR detail</h3>
+            </div>
+            <div class="card-body">
+                <form method="POST" class="post-form">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-label">First name <span class="text-red"></span></label>
+                                <input type="text" name="hr_name" value="{{update_hr.first_name}}" class="form-control"  >
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-label">Last name <span class="text-red"></span></label>
+                                <input type="text" name="last_name" value="{{update_hr.last_name}}" class="form-control"  >
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-label">Hr mail<span class="text-red"></span></label>
+                                <input type="text" name="hr_email" value="{{update_hr.email}}" class="form-control"  required>
+                            </div>
+                            {%  if email %}
+                            <span>already exists</span>
+                            {% endif %}
+                        </div>
+                         <div class="col-md-6">
+                             <div class="form-group">
+                                <label class="form-label">Hr phone_no<span class="text-red">*</span></label>
+                                <input type="text" name= "hr_phone_no" value="{{update_hr.phone_no}}"  pattern="[7-9]{1}[0-9]{9}" title="Phone number with 7 and remaing 9 digit with 0-9 " class="form-control"required>
+                             </div>
+                         </div>
+                         <div class="col-md-6">
+                             <div class="form-group">
+                                <label class="form-label">Added by <span class="text-red">*</span></label>
+                                <input type="text" name= "addded" value="{{request.user}}" class="form-control" readonly>
+                             </div>
+                         </div>
+                     </div>
+                     <div class="btn-list text-end">
+                        <button type="submit" class="btn btn-success cusbtn">UPDATE</button>
+                     </div>
+            </div>
+            </form>
+        </div>
+    </div>
+
+    {% include 'footer.html' %}
+
+    <!-- JQUERY JS -->
+    {% include 'js.html' %}
+    {% block js %}
+    {% endblock %}
+</body>
+</html>

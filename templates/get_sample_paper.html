@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static%}
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    {% include 'css_file.html' %}
+</head>
+
+<body class="app sidebar-mini ltr light-mode">
+    <!--Sidebar start-->
+    {% include 'side_bar.html' %}
+
+    <div class="page-header">
+       <h1 class="page-title">Please Select Ques to Create Sample Paper</h1>
+       <div>
+          <ol class="breadcrumb">
+             <li class="breadcrumb-item"><a href="/dashboard_index">Home</a></li>
+             <li class="breadcrumb-item active" aria-current="page">ques</li>
+          </ol>
+       </div>
+    </div>
+
+    <a href="/add_questions" button type="button" class="btn btn-primary cusbtn">Add More</button></a>
+
+    <div class="main-container">
+        <div class="card">
+            <div class="card-header justify-content-between">
+                <h3 class="card-title">Add question in sample paper</h3>
+            </div>
+            <div class="card-body">
+                <form method="POST" class="post-form" action="/add">
+                   {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-4 mb-3" >
+                            <button type="button" class="btn btn-success w-100 cusbtn">Mcq questions</button>
+                            {% for ques1 in question1 %}
+                            {% if ques1.ques_type_id == 1 %}
+                            <div class="form-group">
+    <!--                                <label class="form-label">question<span class="text-red"></span></label>-->
+                                <p>{{ques1.ques|safe}}</p>
+
+                                    {% if ques1.option_type %}
+                                <div id="optionss1" class="">
+                                        <div class="">
+                                            <label class="form-label"></label>
+                                             <img src="{{ques1.ques_images1.url}}" width="200" height="100">
+                                             <img src="{{ques1.ques_images2.url}}" width="200" height="100">
+                                             <img src="{{ques1.ques_images3.url}}" width="200" height="100">
+                                             <img src="{{ques1.ques_images4.url}}" width="200" height="100">
+                                        </div>
+                                   </div>
+                                {% endif %}
+                                    {% for i in ques1.ques_option %}
+                                   <div id="optionss" class="">
+                                        <div class="d-flex">
+                                            <label class="form-label">{{forloop.counter}})</label>
+                                             <input type="text" class="form-control"   value="{{i}}" readonly>
+                                        </div>
+                                   </div>
+                                {% endfor %}
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="box_id_{{ques1.pk}}"></label>
+                                <input type="checkbox" class="check"  id="box_id_{{ques1.pk}}"  name="box_{{ques1.pk}}"  value="{{ques1.pk}}" >
+                            </div>
+                            {% endif %}
+                            {% endfor %}
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <button type="button" class="btn btn-success w-100 cusbtn">Text questions </button>
+                            {% for ques1 in question1 %}
+                            {% if ques1.ques_type_id == 2 %}
+                            <div class="form-group">
+<!--                                                    <label class="form-label">question<span class="text-red"></span></label>-->
+                                <p>{{ques1.ques|safe}}</p>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="box_id_{{ques1.pk}}"></label>
+                                <input type="checkbox" class="check"  id="box_id_{{ques1.pk}}"  name="box_{{ques1.pk}}"  value="{{ques1.pk}}" >
+                            </div>
+                           {% endif %}
+                            {% endfor %}
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <button type="button" class="btn btn-success w-100 cusbtn">logical questions</button>
+                            {% for ques1 in question1 %}
+                            {% if ques1.ques_type_id == 3 %}
+                            <div class="form-group">
+<!--                                                    <label class="form-label">question<span class="text-red"></span></label>-->
+                                <p>{{ques1.ques|safe}}</p>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="box_id_{{ques1.pk}}"></label>
+                                <input type="checkbox" class="check"  id="box_id_{{ques1.pk}}"  name="box_{{ques1.pk}}"  value="{{ques1.pk}}">
+                            </div>
+                            {% endif %}
+                            {% endfor %}
+                       </div>
+                    </div>
+
+                     <div class="btn-list pt-3">
+                         <button type="submit" onclick="getvalue()" id="demo" class="btn btn-success cusbtn">NEXT</button>
+
+                     </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+<script>
+
+
+    function getvalue(){
+        var listarray=[];
+
+    var checkboxes=document.querySelectorAll(".check");
+    for(var checkbox of checkboxes){
+        checkbox.addEventListener("click",function(){
+            if(this.checked==true){
+                listarray.push(this.value);
+                console.log(this.value);
+            }
+            else{
+                listarray=listarray.filter(e => e !== this.value);
+
+            }
+
+        })
+    }
+
+    $.ajax({
+  type: "POST",
+  url: "add",
+  data: {"tasks[]":"mohan"},
+
+});
+}
+</script>
+
+
+
+
+
+
+{% include 'footer.html' %}
+
+    <!-- JQUERY JS -->
+    {% include 'js.html' %}
+    {% block js %}
+    {% endblock %}
+
+<script type="text/javascript">
+    $("#demo").click(function(){
+         if ($('.check').filter(':checked').length < 1){
+                alert("Please select at least one Check Box");
+                 return false;
+         }
+    });
+</script>
+</body>
+</html>

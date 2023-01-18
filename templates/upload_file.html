@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static%}
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    {% include 'css_file.html' %}
+</head>
+
+<body class="app sidebar-mini ltr light-mode">
+    <!--Sidebar start-->
+    {% include 'side_bar.html' %}
+
+    <div class="page-header">
+       <h1 class="page-title">Upload File for questions</h1>
+       <div>
+          <ol class="breadcrumb">
+             <li class="breadcrumb-item"><a href="/dashboard_index">Home</a></li>
+             <li class="breadcrumb-item active" aria-current="page">file</li>
+          </ol>
+       </div>
+    </div>
+
+
+    <!-- CONTAINER -->
+
+
+    <p>{{e}}</p>
+    <div class="main-container">
+        <div class="card">
+            <div class="card-header justify-content-between">
+                <h3 class="card-title">File</h3>
+            </div>
+            <div class="card-body">
+                <form method="POST" class="post-form" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-label">upload file <span class="text-red">*</span></label>
+                                <input type="file" name= "file" class="form-control" placeholder="place your filehere" accept=".csv" required/>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="btn-list text-end">
+                        <button type="submit" class="btn btn-success cusbtn">NEXT</button>
+                    </div>
+
+                </form>
+                <a href="{% static 'ques_file/upload_questionss.xlsx' %}" download=>click here to download excel file format</a>
+
+            </div>
+        </div>
+    </div>
+{% if added %}
+<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-0">
+      <div class="modal-body alert alert-success">
+        <h4 class="mb-0">Questions Add Successfully</h4>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+     <div class="main-container">
+        <div class="card p-5">
+            <div class="cushead">
+                  <h2 class="fw-bold mb-0">Instructions:-</h2>
+               </div>
+            <div class="rightbar_inner flex-grow-1 d-flex flex-column">
+                  <div class="instructions flex-grow-1"><br>
+                     <p class="fw-bold">1)  please use our file format instead of yours</p>
+                     <p class="fw-bold">2)  If you want to add text or logial type question then you have to add mendatory fields:</p>
+                      <ul class="ms-5">
+                                                            <li>department*(for e.g: pyhon ,java,c etc..)</li>
+                                                            <li>level*(for e.g: fresher,intermediate,experience)</li>
+                                                            <li>question_type*(for e.g: mcq,text,logical)</li>
+                                                             <li>question*</li>
+
+                      </ul>
+<br>
+                      <p class="fw-bold">3)  If you want to add mcq type question then you have to add mendatory fields:</p>
+                      <ul class="ms-5">
+                                                            <li>department*</li>
+                                                            <li>level*</li>
+                                                            <li>question_type*</li>
+                                                             <li>question*</li>
+                                                             <li>correct_ans*</li>
+                                                             <li>question_option1*</li>
+                                                             <li>question_option2*</li>
+                                                             <li>question_option3*</li>
+                                                             <li>question_option4*</li>
+
+                      </ul>
+
+
+                  </div>
+               </div>
+        </div>
+     </div>
+
+
+
+{% include 'footer.html' %}
+
+    <!-- JQUERY JS -->
+    {% include 'js.html' %}
+    {% block js %}
+    {% endblock %}
+<script>
+    console.log("hello");
+    $(window).on('load', function() {
+        $('#exampleModal1').modal('show');
+    });
+</script>
+</body>
+</html>

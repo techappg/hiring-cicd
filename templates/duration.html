@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static%}
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    {% include 'css_file.html' %}
+</head>
+
+<body class="app sidebar-mini ltr light-mode">
+    <!--Sidebar start-->
+    {% include 'side_bar.html' %}
+
+    <div class="page-header">
+       <h1 class="page-title">Add Duration/Title</h1>
+       <div>
+          <ol class="breadcrumb">
+             <li class="breadcrumb-item"><a href="/dashboard_index">Home</a></li>
+             <li class="breadcrumb-item active" aria-current="page">duration/level</li>
+          </ol>
+       </div>
+    </div>
+
+
+    <!-- CONTAINER -->
+    <div class="main-container">
+        <div class="card">
+            <div class="card-header justify-content-between">
+                <h3 class="card-title">Add Duration</h3>
+            </div>
+            <div class="card-body">
+                <form method="POST" class="post-form">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-label">Title <span class="text-red">*</span></label>
+                                <input type="text" name= "title" class="form-control" placeholder="title" required/>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-label">Duration(in Minutes) <span class="text-red">*</span></label>
+                                <input type="text" name= "duration" class="form-control" placeholder="duration" required/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="btn-list text-end">
+                        <button type="submit" class="btn btn-success cusbtn">NEXT</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% include 'footer.html' %}
+
+    <!-- JQUERY JS -->
+    {% include 'js.html' %}
+    {% block js %}
+    {% endblock %}
+</body>
+</html>

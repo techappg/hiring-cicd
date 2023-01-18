@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static%}
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    {% include 'css_file.html' %}
+</head>
+
+<body class="app sidebar-mini ltr light-mode">
+    <!--Sidebar start-->
+    {% include 'side_bar.html' %}
+
+
+
+                <div class="page-header">
+                   <h1 class="page-title">Company Record</h1>
+                   <div>
+                      <ol class="breadcrumb">
+                         <li class="breadcrumb-item"><a href="/dashboard_index">Home</a></li>
+                         <li class="breadcrumb-item active" aria-current="page">Company</li>
+                      </ol>
+                   </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="card">
+                            <div class="card-header justify-content-between">
+                                <h3 class="card-title">All Companies</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="text-end mb-4">
+                                    <button type="button" class="btn btn-primary cusbtn ms-5"  data-bs-toggle="modal" data-bs-target="#exampleModall">Add Company</button>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table border custable text-nowrap text-md-nowrap table-bordered mb-0">
+                                        <thead class="bg-light">
+                                            <tr>
+                                            <th>Sr. no</th>
+                                            <th>company name</th>
+                                            <th>comapny address</th>
+                                            <th>company state</th>
+                                            <th>company email</th>
+                                            <th>company phone.no</th>
+                                            <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tbody>
+                {% for i in all_companies %}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{i.company_Name}}</td>
+                        <td>{{i.company_address}}</td>
+                        <td>{{i.company_state}}</td>
+                        <td>{{i.company_email}}</td>
+                        <td>{{i.company_phone_no}}</td>
+                        <td>
+                            <div class="btn-list">
+                                <a href="company/{{i.id}}" class="btn btn-sm btn-primary" title="View" ><i class="fa fa-eye"></i></a>
+                            </div>
+<!--                                <a href="/company_update/{{i.id}}" class="btn btn-success">update</a></td>-->
+
+                    </tr>
+                {%endfor%}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+<!-- Modal -->
+<div class="modal fade modal-dialog-scrollable" id="exampleModall" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Company Details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+                     <form method="POST" class="post-form">
+                      {% csrf_token %}
+                            <div class="row">
+                                <div class="col-sm-6 col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-label">company Name <span class="text-red">*</span></label>
+                                        <input type="text" name="company_Name" value="{{company_Name}}"  class="form-control"  pattern="^[a-zA-Z,]*$" title="do not use  punctuations" placeholder="company name"  required/>
+                                        {% if name  %}
+
+                                           <span class="text-danger"> name already exist</span>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-label">company address <span class="text-red">*</span></label>
+                                        <input type="text" name="company_address"  value="{{company_address}}" class="form-control" placeholder="company address " required/>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-label">Email address <span class="text-red">*</span></label>
+                                        <input type="email" name="company_email" value="{{company_email}}"  class="form-control" placeholder="Email  address " required/>
+                                    </div>
+                                    {% if email  %}
+                                     <span class="text-danger"> Email already exists</span>
+                                        {% endif %}
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-label">Phone.no<span class="text-red">*</span></label>
+                                        <input type="text"  name="company_phone_no" value="{{company_phone_no}}" class="form-control" pattern="[7-9]{1}[0-9]{9}" title="Phone number with 7-9 and remaing 9 digit with 0-9"  placeholder="Phone.no" required/>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-label">Password<span class="text-red">*</span></label>
+                                        <input type="text"  name="company_Password" value="{{company_Password}}" class="form-control"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"  placeholder="Password" required/>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-label">State <span class="text-red">*</span></label>
+                                        <input type="text" name="company_state" value="{{company_state}}" class="form-control" placeholder="State" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-end">
+                                <button class="btn btn-primary mt-4 mb-0 cusbtn">Submit</button>
+                             </div>
+                        </form>
+                     </div>
+
+      </div>
+    </div>
+  </div>
+
+
+
+
+<!-- Modal -->
+{% if added %}
+<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-body">
+        <h2>Company Details Added Sucessfully</h2>
+      </div>
+
+    </div>
+  </div>
+</div>
+{% endif %}
+
+{% include 'footer.html' %}
+<!-- JQUERY JS -->
+{% include 'js.html' %}
+{% block js %}
+{% endblock %}
+
+{% if name %}
+
+  <script>
+   console.log("hello");
+    $(window).on('load', function() {
+        $('#exampleModall').modal('show');
+    });
+</script>
+
+{% endif %}
+{% if email %}
+  <script>
+   console.log("hello");
+    $(window).on('load', function() {
+        $('#exampleModall').modal('show');
+    });
+</script>
+
+{% endif %}
+
+
+<script>
+    console.log("hello");
+    $(window).on('load', function() {
+        $('#exampleModal1').modal('show');
+    });
+</script>
+</body>
+</html>
+
+
+

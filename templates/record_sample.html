@@ -1,0 +1,59 @@
+ <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Sample Paper</h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+<!--                        <div class="form-group">-->
+<!--                            <label class="form-label">uuid <span class="text-red"></span></label>-->
+<!--                            <input type="text" value="{{get_id.public_url}}" name="name" class="form-control" >-->
+<!--                        </div>-->
+
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-label">Title<span class="text-red"></span></label>
+                            <input type="text" value="{{get_id.title}}" name="name" class="form-control" readonly>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                             <label class="form-label">Duration(in minutes)<span class="text-red"></span></label>
+                            <input type="text" value="{{get_id.duration}}" name="name" class="form-control"  readonly>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-12">
+                        {% for i in  get_ques %}
+
+                        <div class="form-group">
+                            <!--<label class="form-label">Question<span class="text-red"></span></label>-->
+                            <p>{{i.ques|safe}}</p>
+
+                             {% if i.option_type %}
+                                <div id="optionss1" class="">
+                                        <div class="">
+                                             <label class="form-label">{{forloop.counter}})</label>
+                                             <img src="{{i.ques_images1.url}}" width="250" height="150">
+                                             <img src="{{i.ques_images2.url}}"width="250" height="150">
+                                             <img src="{{i.ques_images3.url}}" width="250" height="150">
+                                             <img src="{{i.ques_images4.url}}" width="250" height="150">
+                                        </div>
+                                   </div>
+                                {% endif %}
+                        {% for j in i.ques_option %}
+                        <div id="optionss" class="">
+                            <div class="d-flex">
+                                <label class="form-label">{{forloop.counter}})</label>
+                                <input type="text" class="form-control"   value="{{j}}"  readonly>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,26 @@
+
+
+<!--                                                <div class="form-group">-->
+<!--                                                    <label for="task">Select Language</label>-->
+<!--                                                    <select id="task1" class="form-control" name="task_language" required >-->
+<!--                                                        {% for element in all_task_languages %}-->
+<!--                                                        <option value="{{element.0|title}}">{{element.0|title}}</option>-->
+<!--                                                        {% endfor %}-->
+<!--                                                    </select>-->
+<!--                                                </div>-->
+
+
+                                                <div class="form-group">
+<!--                                                    <label for="task">Select Paper</label>-->
+                                                    <label class="form-label">Select Paper<span class="text-red">*</span></label>
+                                                    <select id="sample"  onchange="myFunction()" class="form-control" name="sample_paper1" required >
+                                                       <option value="">select paper</option>
+                                                        {% for i in sample_paper %}
+                                                        <option value="{{i.id}}">{{i.title}}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                        <br>
+                                                    <button type="button" class="btn btn-primary   ms-5"   data-bs-toggle="modal" data-bs-target="#exampleModal2">View Sample Paper</button>
+
+                                                </div>
+

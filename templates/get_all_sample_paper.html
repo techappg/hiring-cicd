@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static%}
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    {% include 'css_file.html' %}
+</head>
+
+<body class="app sidebar-mini ltr light-mode">
+    <!--Sidebar start-->
+    {% include 'side_bar.html' %}
+
+    <div class="page-header">
+       <h1 class="page-title">level/Language</h1>
+       <div>
+          <ol class="breadcrumb">
+             <li class="breadcrumb-item"><a href="/dashboard_index">Home</a></li>
+             <li class="breadcrumb-item active" aria-current="page">level/Language</li>
+          </ol>
+       </div>
+    </div>
+
+
+    <div class="main-container">
+        <div class="card">
+            <div class="card-header justify-content-between">
+                <h3 class="card-title">Filter</h3>
+            </div>
+            <div class="card-body">
+                <form method="POST" class="post-form">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-label" for="Experience">Experience Level</label>
+                                <select id="Experience" class="form-control" name="level_task" required id="person_level">
+                                    {% for i in all_level %}
+                                    <option value="{{i.0|title}}">{{i.0|title}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-label" for="task">Select Departmnet</label>
+                                <select id="task" class="form-control" name="task_language" required id="person_task">
+                                    {% for element in all_task_languages %}
+                                    <option value="{{element.0|title}}">{{element.0|title}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="btn-list text-end">
+                        <button type="submit" class="btn btn-success cusbtn">NEXT</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header justify-content-between">
+                <h3 class="card-title">All Sample Papers</h3>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered border text-nowrap mb-0">
+                        <thead>
+                            <tr>
+                            <th>Sr. no</th>
+                            <th>Department</th>
+                            <th>level</th>
+                            <th>title</th>
+                            <th>Duration(in minutes)</th>
+                            <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {%  for i in all_sample %}
+                            <tr>
+                                <td>{{forloop.counter}}</td>
+                                <td>{{i.language|title}}</td>
+                                <td>{{i.level|title}}</td>
+                                <td>{{i.title|title}}</td>
+                                <td>{{i.duration|title}}</td>
+                                <td class="btn-list"><a href="all_sample_paper/{{i.id}}" title="View" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i></a></td>
+                            </tr>
+
+                            {%endfor%}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% include 'footer.html' %}
+
+    <!-- JQUERY JS -->
+    {% include 'js.html' %}
+    {% block js %}
+    {% endblock %}
+</body>
+</html>

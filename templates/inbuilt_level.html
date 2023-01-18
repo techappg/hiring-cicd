@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static%}
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    {% include 'css_file.html' %}
+</head>
+
+<body class="app sidebar-mini ltr light-mode">
+    <!--Sidebar start-->
+    {% include 'side_bar.html' %}
+
+
+    <div class="page-header">
+       <h1 class="page-title">Level</h1>
+       <div>
+          <ol class="breadcrumb">
+             <li class="breadcrumb-item"><a href="/dashboard_index">Home</a></li>
+             <li class="breadcrumb-item active" aria-current="page">Level</li>
+          </ol>
+       </div>
+    </div>
+
+
+
+
+
+
+
+                    <div class="row">
+                            <div class="col-xl-12">
+                                <div class="card">
+                                    <div class="card-header justify-content-between">
+                                        <h3 class="card-title">Level</h3>
+                                         <button type="button" class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#exampleModal">Add level</button>
+
+                                    </div>
+                                    <div class="card-body">
+
+                                        <div class="table-responsive">
+                                            <table class="table border text-nowrap text-md-nowrap table-bordered mb-0">
+                                                <thead>
+                                                    <tr>
+                                                    <th>Sr. no</th>
+                                                    <th>Level Name </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tbody>
+                        {% for i in all_level  %}
+                            <tr>
+                                <td>{{forloop.counter}}</td>
+                                <td>{{i.name|title}}</td>
+                            </tr>
+                        {%endfor%}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                    </div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add level</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+                        <form method="POST" class="post-form">
+                      {% csrf_token %}
+                        <div class="col-sm-6 col-md-6">
+                                                <div class="form-group">
+                                                    {% if tasklevel %}
+                                                    <span class="text-danger">Already Exists</span>
+                                                    {% endif %}
+                                                    <label class="form-label">Add level <span class="text-red">*</span></label>
+                                                    <input type="text" name="name" class="form-control" placeholder="add level" required>
+                                                </div>
+                        </div>
+                    <div class="btn-list">
+                                        <button type="submit" class="btn btn-success btn-pill">Add</button>
+                                    </div>
+                        </form>
+      </div>
+    </div>
+  </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% include 'footer.html' %}
+
+    <!-- JQUERY JS -->
+    {% include 'js.html' %}
+    {% block js %}
+    {% endblock %}
+    {% if tasklevel %}
+<script>
+    console.log("hello");
+    $(window).on('load', function() {
+        $('#exampleModal').modal('show');
+    });
+    {% endif %}
+</script>
+</body>
+</html>
+
+
+
+

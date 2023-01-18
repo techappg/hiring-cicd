@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static%}
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    {% include 'css_file.html' %}
+</head>
+
+<body class="app sidebar-mini ltr light-mode">
+    <!--Sidebar start-->
+    {% include 'side_bar.html' %}
+
+    <div class="page-header">
+       <h1 class="page-title">Level/Department</h1>
+       <div>
+          <ol class="breadcrumb">
+             <li class="breadcrumb-item"><a href="/dashboard_index">Home</a></li>
+             <li class="breadcrumb-item active" aria-current="page">Level/Department</li>
+          </ol>
+       </div>
+    </div>
+
+
+
+
+        <!-- CONTAINER -->
+        <div class="main-container">
+            <div class="card">
+                <div class="card-header justify-content-between">
+                    <h3 class="card-title">Please select the desired level and department</h3>
+                </div>
+                <div class="card-body">
+                    <form method="POST" class="post-form">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="Experience">Experience Level</label>
+                                    <select id="Experience" class="form-control" name="level_task" required id="person_level">
+                                        {% for i in all_level %}
+                                        <option value="{{i.0|title}}">{{i.0|title}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="task">Select Department</label>
+                                    <select id="task" class="form-control" name="task_language" required id="person_task">
+                                        {% for element in all_task_languages %}
+                                        <option value="{{element.0|title}}">{{element.0|title}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+            <!--             <div class="form-group">-->
+            <!--                <label for="ques type">Experience Level</label>-->
+            <!--                <select id="ques type" class="form-control" name="ques_type" required id="person_type">-->
+            <!--                    {% for i in all_ques_type %}-->
+            <!--                    <option value="{{i.0|title}}">{{i.0|title}}</option>-->
+            <!--                    {% endfor %}-->
+            <!--                 </select>-->
+            <!--              </div>-->
+                        </div>
+                        <div class="btn-list text-end">
+                            <button type="submit" class="btn btn-success cusbtn">NEXT</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+{% include 'footer.html' %}
+
+    <!-- JQUERY JS -->
+    {% include 'js.html' %}
+    {% block js %}
+    {% endblock %}
+</body>
+</html>

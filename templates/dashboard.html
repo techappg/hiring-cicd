@@ -1,0 +1,229 @@
+
+<!DOCTYPE html>
+<html lang="en">
+{% load static%}
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    {% include 'css_file.html' %}
+</head>
+
+<body class="app sidebar-mini ltr light-mode">
+    <!--Sidebar start-->
+    {% include 'side_bar.html' %}
+
+    <div class="page-header">
+       <h1 class="page-title">Dashboard</h1>
+       <div>
+          <ol class="breadcrumb">
+             <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+             <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+          </ol>
+       </div>
+    </div>
+   {% if request.user.is_superuser %}
+    <div class="row dashboard_card">
+       <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12">
+          <div class="row">
+             <div class="col-lg-6 col-md-6 col-sm-12 col-xl-3">
+                <div class="card bg-gradient1 overflow-hidden">
+                   <div class="card-body">
+                      <div class="d-flex">
+                         <div class="mt-2">
+                            <h6 class="">Total Test Record</h6>
+                            <h2 class="mb-0 number-font">{{interviewee_test_record}}</h2>
+                            <a href="/all_record_interviwee/start_time" class="text-white"></a>
+                         </div>
+                      </div>
+                   </div>
+                </div>
+             </div>
+
+             <div class="col-lg-6 col-md-6 col-sm-12 col-xl-3">
+                <div class="card bg-gradient2 overflow-hidden">
+                   <div class="card-body">
+                      <div class="d-flex">
+                         <div class="mt-2">
+                            <h6 class="">Total Sample Paper</h6>
+                            <h2 class="mb-0 number-font">{{sample_paper}}</h2>
+                            <a href="/all_sample" class="text-white"></a>
+                         </div>
+                      </div>
+                   </div>
+                </div>
+             </div>
+             <div class="col-lg-6 col-md-6 col-sm-12 col-xl-3">
+                <div class="card bg-gradient3 overflow-hidden">
+                   <div class="card-body">
+                      <div class="d-flex">
+                         <div class="mt-2">
+                            <h6 class="">Active Company</h6>
+                            <h2 class="mb-0 number-font">{{active_company}}</h2>
+                            <a href="/view_company/active" class="text-white"></a>
+                         </div>
+                      </div>
+                   </div>
+                </div>
+             </div>
+             <div class="col-lg-6 col-md-6 col-sm-12 col-xl-3">
+                <div class="card bg-gradient4 overflow-hidden">
+                   <div class="card-body">
+                      <div class="d-flex">
+                         <div class="mt-2">
+                            <h6 class="">Deactive Company</h6>
+                            <h2 class="mb-0 number-font">{{deactive_company}}</h2>
+                            <a href="/view_company/deactive" class="text-white"></a>
+                         </div>
+                      </div>
+                   </div>
+                </div>
+             </div>
+             <div class="col-lg-6 col-md-6 col-sm-12 col-xl-3">
+                <div class="card bg-gradient5 overflow-hidden">
+                   <div class="card-body">
+                      <div class="d-flex">
+                         <div class="mt-2">
+                            <h6 class="">Total Interviewee</h6>
+                            <h2 class="mb-0 number-font">{{interviewee}}</h2>
+                            <a href="/all_record_interviwee/all" class="text-white"></a>
+                         </div>
+                      </div>
+                   </div>
+                </div>
+             </div>
+             <div class="col-lg-6 col-md-6 col-sm-12 col-xl-3">
+                <div class="card bg-gradient6 overflow-hidden">
+                   <div class="card-body">
+                      <div class="d-flex">
+                         <div class="mt-2">
+                            <h6 class="">Total Hr</h6>
+                            <h2 class="mb-0 number-font">{{hr}}</h2>
+                            <a href="/all_hr" class="text-white"></a>
+                         </div>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+    {% endif %}
+    {% if request.user.is_company %}
+    <div class="row dashboard_card">
+       <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12">
+          <div class="row">
+             <div class="col-lg-6 col-md-6 col-sm-12 col-xl-3">
+                <div class="card bg-gradient1 overflow-hidden">
+                   <div class="card-body">
+                      <div class="d-flex">
+                         <div class="mt-2">
+                            <h6 class="">Total Language</h6>
+                            <h2 class="mb-0 number-font">{{language}}</h2>
+                            <a href="/get_language" class="text-white"></a>
+                         </div>
+                      </div>
+                   </div>
+                </div>
+             </div>
+             <div class="col-lg-6 col-md-6 col-sm-12 col-xl-3">
+                <div class="card bg-gradient2 overflow-hidden">
+                   <div class="card-body">
+                      <div class="d-flex">
+                         <div class="mt-2">
+                            <h6 class="">Total Interviewee</h6>
+                            <h2 class="mb-0 number-font">{{interviewee}}</h2>
+                            <a href="/all_record_interviwee/all" class="text-white"></a>
+                         </div>
+                      </div>
+                   </div>
+                </div>
+             </div>
+             <div class="col-lg-6 col-md-6 col-sm-12 col-xl-3">
+                <div class="card bg-gradient2 overflow-hidden">
+                   <div class="card-body">
+                      <div class="d-flex">
+                         <div class="mt-2">
+                            <h6 class="">Total Sample Paper</h6>
+                            <h2 class="mb-0 number-font">{{sample_paper}}</h2>
+                            <a href="/all_sample" class="text-white"></a>
+
+                         </div>
+                      </div>
+                   </div>
+                </div>
+             </div>
+             <div class="col-lg-6 col-md-6 col-sm-12 col-xl-3">
+                <div class="card bg-gradient3 overflow-hidden">
+                   <div class="card-body">
+                      <div class="d-flex">
+                         <div class="mt-2">
+                            <h6 class="">Test Record</h6>
+                            <h2 class="mb-0 number-font">{{interviewee_test_record}}</h2>
+                            <a href="/all_record_interviwee/start_time" class="text-white"></a>
+
+                         </div>
+                      </div>
+                   </div>
+                </div>
+             </div>
+             <div class="col-lg-6 col-md-6 col-sm-12 col-xl-3">
+                <div class="card bg-gradient4 overflow-hidden">
+                   <div class="card-body">
+                      <div class="d-flex">
+                         <div class="mt-2">
+                            <h6 class="">Total Hr</h6>
+                            <h2 class="mb-0 number-font">{{hr}}</h2>
+                            <a href="/all_hr" class="text-white"></a>
+                         </div>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+    {% endif %}
+    {% if request.user.is_HR %}
+    <div class="row dashboard_card">
+       <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12">
+          <div class="row">
+             <div class="col-lg-6 col-md-6 col-sm-12 col-xl-3">
+                <div class="card bg-gradient2 overflow-hidden">
+                   <div class="card-body">
+                      <div class="d-flex">
+                         <div class="mt-2">
+                            <h6 class="">Total Interviewee</h6>
+                            <h2 class="mb-0 number-font">{{interviewee}}</h2>
+                            <a href="/all_record_interviwee/all" class="text-white"></a>
+                         </div>
+                      </div>
+                   </div>
+                </div>
+             </div>
+             <div class="col-lg-6 col-md-6 col-sm-12 col-xl-3">
+                <div class="card bg-gradient3 overflow-hidden">
+                   <div class="card-body">
+                      <div class="d-flex">
+                         <div class="mt-2">
+                            <h6 class="">Test Record</h6>
+                            <h2 class="mb-0 number-font">{{interviewee_test_record}}</h2>
+                            <a href="/all_record_interviwee/start_time" class="text-white"></a>
+                         </div>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+    {% endif %}
+
+    {% include 'footer.html' %}
+
+    <!-- JQUERY JS -->
+    {% include 'js.html' %}
+    {% block js %}
+    {% endblock %}
+</body>
+</html>

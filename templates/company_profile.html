@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+    <!-- META DATA -->
+    <meta charset="UTF-8">
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0'>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    {% load static %}
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'images/brand/logo-2.png" />
+    <title>Register || Visiontrek Communication</title>
+    <link id="style" href="{% static 'plugins/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/style.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/icons.css' %}" rel="stylesheet" />
+    <link id="theme" rel="stylesheet" type="text/css" media="all" href="{% static 'colors/color1.css' %}" />
+    <link href="{% static 'css/custom.css' %}" rel="stylesheet" />
+</head>
+<body class="app sidebar-mini ltr">
+    <form method="POST" class="post-form">
+        {% csrf_token %}
+        <div class="login-img">
+            <div id="global-loader">
+                <img src="{% static 'images/loader.svg' %}" class="loader-img" alt="Loader">
+            </div>
+            <div class="page">
+                <div class="">
+                   <div class="col col-login mx-auto mt-7">
+                        <div class="text-center">
+                            <a href="/">
+                                <img src="{% static 'images/brand/logo.png' %}" class="img-fluid header-brand-img" alt="Visiontrek Communication" />
+                            </a>
+                        </div>
+                    </div>
+                    <div class="container-login100">
+                        <div class="wrap-login100 p-6 w-400">
+                            <div class="login100-form validate-form">
+                                <span class="login100-form-title pb-5">Register</span>
+                                <div class="panel panel-primary">
+                                    <div class="panel-body tabs-menu-body p-0">
+                                        <div class="tab-content">
+                                            <div class="tab-pane active" id="tab5">
+                                                <div class="wrap-input100 validate-input input-group" >
+                                                    <a href="javascript:void(0)" class="input-group-text bg-white text-muted">
+                                                        <i class="zmdi zmdi-account-circle text-muted" aria-hidden="true"></i>
+                                                    </a>
+                                                    <input class="input100 border-start-0 form-control ms-0" type="text" name="company_Name"  value="{{company_Name}}" pattern="^[a-zA-Z,]*$" title="do not use  punctuations" placeholder="Company Name" required/>
+
+                                                </div>
+                                                {% if  name %}
+                                                    <span class="text-danger"> Name already exists</span>
+                                                    {% endif %}
+                                                <div class="wrap-input100 validate-input input-group" >
+                                                    <a href="javascript:void(0)" class="input-group-text bg-white text-muted">
+                                                        <i class="zmdi zmdi-pin text-muted" aria-hidden="true"></i>
+                                                    </a>
+                                                    <input class="input100 border-start-0 form-control ms-0" type="text" name="company_address" value="{{company_address}}" placeholder="Company Address" required/>
+                                                </div>
+                                                <div class="wrap-input100 validate-input input-group" >
+                                                    <a href="javascript:void(0)" class="input-group-text bg-white text-muted">
+                                                        <i class="zmdi zmdi-email text-muted" aria-hidden="true"></i>
+                                                    </a>
+                                                    <input class="input100 border-start-0 form-control ms-0" type="email" name="company_email"  value="{{company_email}}" placeholder="enter valid email address " required/>
+                                                </div>
+                                                {% if  email %}
+                                                    <span class="text-danger"> Email already exists</span>
+                                                    {% endif %}
+                                                <div class="wrap-input100 validate-input input-group">
+                                                    <a href="javascript:void(0)" class="input-group-text bg-white text-muted">
+                                                        <i class="zmdi zmdi-phone text-muted" aria-hidden="true"></i>
+                                                    </a>
+                                                    <input class="input100 border-start-0 form-control ms-0" type="tel"  name="company_phone_no" value="{{company_phone_no}}" pattern="[7-9]{1}[0-9]{9}" title="Phone number with 7 and remaing 9 digit with 0-9 "placeholder="Phone Number" required/>
+                                                </div>
+                                                <div class="wrap-input100 validate-input input-group">
+                                                    <a href="javascript:void(0)" class="input-group-text bg-white text-muted">
+                                                        <i class="zmdi zmdi-store text-muted" aria-hidden="true"></i>
+                                                    </a>
+
+                                                    <!--- India states -->
+<select  class="form-select" id="country-state" name="company_state"  value="{{company_state}}" required>
+    <option  selected>select state</option>
+    <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+    <option value="Andhra Pradesh">Andhra Pradesh</option>
+    <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+    <option value="Assam">Assam</option>
+    <option value="Bihar">Bihar</option>
+    <option value="Chandigarh">Chandigarh</option>
+    <option value="Chhattisgarh">Chhattisgarh</option>
+    <option value="Dadra and Nagar Haveli">Dadra and Nagar Haveli</option>
+    <option value="Daman and Diu">Daman and Diu</option>
+    <option value="Delhi">Delhi</option>
+    <option value="Goa">Goa</option>
+    <option value="Gujarat">Gujarat</option>
+    <option value="Haryana">Haryana</option>
+    <option value="HHimachal Pradesh">Himachal Pradesh</option>
+    <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+    <option value="Jharkhand">Jharkhand</option>
+    <option value="Karnataka">Karnataka</option>
+    <option value="Kerala">Kerala</option>
+    <option value="Ladakh">Ladakh</option>
+    <option value="Lakshadweep">Lakshadweep</option>
+    <option value="Madhya Pradesh">Madhya Pradesh</option>
+    <option value="Maharashtra">Maharashtra</option>
+    <option value="Manipur">Manipur</option>
+    <option value="Meghalaya">Meghalaya</option>
+    <option value="Mizoram">Mizoram</option>
+    <option value="Nagaland">Nagaland</option>
+    <option value="Odisha">Odisha</option>
+    <option value="Puducherry">Puducherry</option>
+    <option value="Punjab">Punjab</option>
+    <option value="Rajasthan">Rajasthan</option>
+    <option value="Sikkim">Sikkim</option>
+    <option value="Tamil Nadu">Tamil Nadu</option>
+    <option value="Telangana">Telangana</option>
+    <option value="Tripura">Tripura</option>
+    <option value="Uttar Pradesh">Uttar Pradesh</option>
+    <option value="Uttarakhand">Uttarakhand</option>
+    <option value="West Bengal">West Bengal</option>
+</select>
+                                                </div>
+                                                <div class="wrap-input100 validate-input input-group" id="Password-toggle">
+                                                    <a href="javascript:void(0)" class="input-group-text bg-white text-muted">
+                                                        <i class="zmdi zmdi-eye text-muted" aria-hidden="true"></i>
+                                                    </a>
+                                                    <input class="input100 border-start-0 form-control ms-0" type="password"  name="company_Password" value="{{company_Password}}" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"  placeholder="Password" required/>
+                                                </div>
+                                                <div class="pt-1 mb-2">
+                                                 <button class="btn btn-primary btn-lg btn-block cusbtn py-3" type="submit">Signup</button>
+                                               </div>
+                                                <div class="text-center pt-2">
+                                                    <p class="text-dark mb-0">Have an account? <a href="/"class="text-primary ms-1">Sign in</a></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <!-- JQUERY JS -->
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <!-- BOOTSTRAP JS -->
+    <script src="{% static 'plugins/bootstrap/js/popper.min.js' %}"></script>
+    <script src="{% static 'plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+    <!-- SHOW PASSWORD JS -->
+    <script src="{% static 'js/show-password.min.js' %}"></script>
+    <!-- GENERATE OTP JS -->
+    <script src="{% static 'js/generate-otp.js' %}"></script>
+    <!-- Perfect SCROLLBAR JS-->
+    <script src="{% static 'plugins/p-scroll/perfect-scrollbar.js' %}"></script>
+    <!-- Color Theme js -->
+    <script src="{% static 'js/themeColors.js' %}"></script>
+    <!-- CUSTOM JS -->
+    <script src="{% static 'js/custom.js' %}"></script>
+</body>
+</html>

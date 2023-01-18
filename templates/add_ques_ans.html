@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static%}
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    {% include 'css_file.html' %}
+
+    <script src="{% static 'ck/ckeditor.js' %}"></script>
+
+</head>
+
+<body class="app sidebar-mini ltr light-mode">
+    <!--Sidebar start-->
+    {% include 'side_bar.html' %}
+
+    <div class="page-header">
+       <h1 class="page-title">Question/Answer</h1>
+       <div>
+          <ol class="breadcrumb">
+             <li class="breadcrumb-item"><a href="/">Home</a></li>
+             <li class="breadcrumb-item active" aria-current="page">ques</li>
+          </ol>
+       </div>
+    </div>
+
+    <!--app-content open-->
+    <div class="main-container">
+        {% if added %}
+        <div class="alert alert-success" role="alert">Add Question Successfully</div>
+        {% endif %}
+        <h4>If  you want to add multiple questions at the same time please click on <a href="/upload_file">Here</a></h4>
+        <div class="card">
+
+            <div class="card-header justify-content-between">
+                <h3 class="card-title">Add Question/Answer</h3>
+            </div>
+            <div class="card-body">
+                <form  id="ckeditorForm" method="POST" class="post-form" enctype="multipart/form-data">
+              {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="form-label" for="Experience">Experience Level</label>
+                                <select id="Experience" class="form-control" name="level_task"  id="person_level" required="required">
+                                    <option value="" >Select level</option>
+                                    {% for i in all_level %}
+                                    <option value="{{i.0|title}}">{{i.0|title}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-label" for="ques type">Ques Type</label>
+                                <select id="ques type" class="form-control" required="required" name="ques_type"  id="person_type">
+                                   <option value="" >Select ques type</option>
+                                    {% for i in all_ques_type %}
+                                    <option value="{{i.0|title}}">{{i.0|title}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-label" for="task">Select Department</label>
+                                <select id="task" class="form-control" required="required" name="task_language"  id="person_task" >
+                                    <option value="" >Select Department</option>
+                                    {% for element in all_task_languages %}
+                                    <option value="{{element.0|title}}">{{element.0|title}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="form-label">Question<span class="text-red"></span></label>
+
+                               <textarea name="ques" id="editor1" class="form-control" rows="10" cols="80" required></textarea>
+            <script>
+                // Replace the <textarea id="editor1"> with a CKEditor 4
+                // instance, using default configuration.
+                CKEDITOR.replace( 'editor1' );
+            </script>
+
+                            </div>
+                        </div>
+
+
+                        <div id="optionss" class="d-none col-md-12">
+                            <p>select your option type</p>
+                            <div class="d-flex" id="option_type">
+                                <div class="form-check">
+                          <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="text" checked>
+                          <label class="form-check-label" for="exampleRadios1">
+                            text
+                          </label>
+                        </div>
+                        <div class="form-check mx-2">
+                          <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="image">
+                          <label class="form-check-label" for="exampleRadios2">
+                            image
+                          </label>
+                        </div>
+                            </div>
+<!--                             textfield-->
+                            <div class="row" id="text_option">
+                                <div class="col-sm-6 col-md-3">
+                                    <div class="form-group">
+                                        <label class="form-label">Option A.</label>
+                                         <input type="text" class="form-control"  name="value1" placeholder="option a" id="optionA" >
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-3">
+                                    <div class="form-group">
+                                        <label class="form-label">Option B.</label>
+                                        <input type="text" class="form-control" name="value2" placeholder="option b" id="optionB" >
+
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-3">
+                                    <div class="form-group">
+                                        <label class="form-label">Option C.</label>
+                                        <input type="text" class="form-control" name="value3" placeholder="option c" id="optionC" >
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-3">
+                                    <div class="form-group">
+                                        <label class="form-label">Option D.</label>
+                                        <input type="text" class="form-control" name="value4" placeholder="option d" id="optionD" >
+                                    </div>
+                                </div>
+
+                                <center><span class="d-none text-danger"  id="etext" >Please fill out all input box field</span></center>
+                            </div>
+
+
+<!--                            image field-->
+                        <input type="hidden" name="id_selected" value="" id="id_selected">
+                             <div class="row d-none" id="image_option">
+                                <div class="col-sm-6 col-md-3">
+                                    <div class="form-group">
+                                        <label class="form-label">Option A.</label>
+                                         <input type="file" class="form-control"  name="a" placeholder="option a" id="img_optionA" >
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-3">
+                                    <div class="form-group">
+                                        <label class="form-label">Option B.</label>
+                                        <input type="file" class="form-control" name="b" placeholder="option b" id="img_optionB" >
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-3">
+                                    <div class="form-group">
+                                        <label class="form-label">Option C.</label>
+                                        <input type="file" class="form-control" name="c" placeholder="option c" id="img_optionC" >
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-3">
+                                    <div class="form-group">
+                                        <label class="form-label">Option D.</label>
+                                        <input type="file" class="form-control" name="d" placeholder="option d" id="img_optionD" >
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="d-flex" id="mainForm">
+                                <p class="mx-2">Correct Answer</p>
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" value="A" name="ans" id="correcta" >
+                          <label class="form-check-label" for="exampleRadios1">
+                             a
+                          </label>
+                        </div>
+                        <div class="form-check mx-2">
+                          <input class="form-check-input" type="radio"  value="B" name="ans" id="correctb" >
+                          <label class="form-check-label" for="exampleRadios2">
+                             b
+                          </label>
+                        </div>
+                        <div class="form-check mx-2">
+                          <input class="form-check-input" type="radio" value="C" name="ans" id="correctc" >
+                          <label class="form-check-label" for="exampleRadios2">
+                             c
+                          </label>
+                        </div>
+                        <div class="form-check mx-2">
+                          <input class="form-check-input" type="radio" value="D" name="ans" id="correctd" >
+                          <label class="form-check-label" for="exampleRadios2">
+                            d
+                          </label>
+                        </div>
+
+</div>
+
+
+
+                            <div class="col-sm-6 col-md-4 d-none " id="anser">
+                                <div class="form-group d-flex">
+                                    <p class="mt-2">Are you sure </p>
+                                    <!-- <input type="text" class="form-control" name="Answer"  id="selected_answer" > -->
+<!--                                    <span class="border border-primary mx-2" ></span>-->
+                                    <input type="text" id="selected_answer" name="select_answer">
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+<!--                        <div class="col-md-12">-->
+<!--                            <div class="form-group">-->
+<!--                                <label class="form-label">Answer<span class="text-red"></span></label>-->
+<!--                                <textarea name="ans" class="form-control"  rows="10" cols="80" placeholder="enter correct answer here"  required></textarea>-->
+<!--                            </div>-->
+<!--                        </div>-->
+                        <div class="btn-list text-end">
+                            <button type="submit"  class="btn btn-success cusbtn">NEXT</button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% include 'footer.html' %}
+
+    <!-- JQUERY JS -->
+    {% include 'js.html' %}
+    {% block js %}
+<script>
+
+
+
+
+document.getElementById("ques type").addEventListener("click",  myFunction);
+function myFunction() {
+  var quest_type=document.getElementById("ques type").value;
+    if(quest_type=="Mcq"){
+    document.getElementById("optionss").classList.remove("d-none");
+
+    }
+    else{
+    document.getElementById("optionss").classList.add("d-none");
+    }
+
+}
+
+CKEDITOR.replace( 'editor2',
+{
+   on :
+   {
+      instanceReady : function ( evt )
+      {
+         // Hide the editor top bar.
+         document.getElementById( 'cke_top_' + evt.editor.name ).style.display = 'none';
+      }
+   }
+} );
+
+var img="";
+
+$(document).ready(function() {
+    $('input[type=radio]').change(function() {
+
+        if($(this).val()=="image"){
+
+        $("#image_option").removeClass( "d-none" );
+        $("#text_option").addClass( "d-none" );
+        img="image";
+
+        }
+        else if($(this).val()=="text"){
+         $("#image_option").addClass( "d-none" );
+        $("#text_option").removeClass( "d-none" );
+        img="text";
+        }
+    });
+});
+
+
+var mainForm=document.getElementById("mainForm");
+mainForm.onclick = function(){
+    var radVal = document.querySelector('input[name = ans]:checked').value;
+
+   if(img=="image")
+   {
+   let imga =document.getElementById("img_option"+radVal).value;
+
+   document.getElementById("selected_answer").value=radVal;
+   document.getElementById("anser").classList.remove("d-none");
+    console.log(imga);
+   }
+   else{
+    let optiona =document.getElementById("option"+radVal).value;
+        if(optiona==""){
+            document.getElementById("selected_answer").innerHTML="please fill the selected option field";
+            document.getElementById("anser").classList.remove("d-none");
+
+        }else{
+
+            document.getElementById("selected_answer").value=optiona;
+        document.getElementById("anser").classList.remove("d-none");
+
+        }
+   }
+
+
+}
+
+
+
+</script>
+{% endblock %}
+</body>
+</html>

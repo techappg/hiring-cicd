@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <title>Start Test || Skill Test</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        :root{
+    --primary-bg-color: #0774c7;
+    --secondary-bg-color: #333;
+}
+body{
+    color: var(--secondary-bg-color);
+    font-family: "IBM Plex Sans", sans-serif;
+}
+a {
+    color: var(--primary-bg-color);
+}
+
+.cusdashboard{
+    display: flex;
+    justify-content: flex-end;
+}
+.leftbar{
+    position: fixed;
+    left: 0%;
+    top: 0;
+    height: 100%;
+    width: 250px;
+    background-color: #e8f1ff;
+    z-index: 9;
+    /* border-right: 1px solid #d4d4d4; */
+}
+.rightbar{
+    flex: 0 0 calc(100% - 250px);
+}
+.rightbar_inner{
+    padding: 20px 30px;
+}
+.leftbar_inner .logo img {
+    max-height: 35px;
+}
+.cushead {
+    padding: 20px 30px;
+    min-height: 80px;
+    border-bottom: 1px solid #d4d4d4;
+    display: flex;
+    align-items: center;
+}
+p:last-child{
+    margin-bottom: 0;
+}
+.leftbar_inner .logo {
+    padding: 15px 20px;
+    min-height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid #d4d4d4;
+}
+
+.cuscard .card {
+    margin-bottom: 1em;
+}
+.cuscard .card {
+    margin-bottom: 1em;
+    font-size: 13px;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding: 14px 15px;
+    border: none;
+    border-radius: 7px;
+}
+.cuscard .card h4 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #4880d3;
+}
+.cuscard .card h4 i {
+    font-size: 14px;
+    width: 15px;
+    color: #565656;
+}
+.cuscard .card .progress {
+    border-radius: 50px;
+    height: 7px;
+}
+.cusbtn {
+    box-shadow: inset 0 -5px 1px rgba(0,0,0,.16);
+    border-radius: 7px;
+    border: none;
+}
+.form-group{
+    margin-bottom: 15px;
+}
+.ques {
+    display: flex;
+}
+.ques span {
+    flex: 0 0 50px;
+    font-size: 22px;
+    height: 50px;
+    width: 100%;
+    border-radius: 50%;
+    background-color: #4880d3;
+    text-align: center;
+    color: #fff;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+    margin-right: 10px;
+    border: 3px solid rgb(255 255 255 / 28%);
+}
+.ques h4 {
+    padding-top: 0;
+    font-weight: bold;
+    line-height: normal;
+    margin: 0;
+    align-self: center;
+    font-size: 18px;
+}
+.answer {
+    padding-top: 1em;
+    margin-top: 1em;
+    padding-left: 60px;
+}
+
+@media screen and (max-width:767px){
+    .leftbar {
+        position: unset;
+        width: 100%;
+        height: unset;
+        background: unset;
+        border-bottom: 1px solid #ddd;
+    }
+    .cusdashboard {
+        flex-direction: column;
+    }
+    .leftbar_inner {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .leftbar_inner .logo {
+        flex: 0 0 100%;
+        background-color: #6c757d;
+    }
+    .leftbar_inner .quiz {
+        flex: 0 0 100%;
+        text-align: center;
+    }
+    .leftbar_inner .cuscard {
+        display: flex;
+        flex-wrap: wrap;
+        flex: 0 0 100%;
+        justify-content: space-between;
+    }
+    .cuscard .card {
+        flex: 1;
+        max-width: calc(50% - 10px);
+        box-shadow: 0 4px 23px -5px rgb(0 0 0 / 10%);
+        border: 1px solid #eee;
+        margin-bottom: 30px;
+    }
+    .cushead h2 {
+        font-size: 20px;
+    }
+    .cushead {
+        flex-direction: column;
+    }
+    .rightbar_inner {
+        padding: 20px;
+    }
+    .ques span {
+        flex: 0 0 40px;
+        font-size: 16px;
+        height: 40px;
+    }
+    .ques h4 {
+        font-size: 16px;
+    }
+    .answer {
+        margin-top: 0.5em;
+        padding-left: 50px;
+    }
+    .next-btn .btn {
+        width: 100%;
+        padding: 12px 15px !IMPORTANT;
+    }
+}
+    </style>
+<script type="text/javascript">
+        function preventBack() {
+            window.history.forward();
+        }
+
+        setTimeout("preventBack()", 0);
+
+        window.onunload = function () { null };
+</script>
+    <script src="{% static 'ck/ckeditor.js' %}"></script>
+    <style>
+        .cke_top { display: none !important }
+     </style>
+<script type="text/javascript">
+        function preventBack() {
+            window.history.forward();
+        }
+
+        setTimeout("preventBack()", 0);
+
+        window.onunload = function () { null };
+</script>
+
+</head>
+<body>
+    <main class="d-flex min-vh-100 flex-column">
+        <div class="cusdashboard flex-grow-1">
+            <div class="leftbar">
+                <div class="leftbar_inner">
+                    <div class="logo mb-4">
+                        <a href="#">
+                            <img src="{% static 'images/media/logo.png' %}" alt="Visiontrek Communication" class="img-fluid" />
+                        </a>
+                    </div>
+                    <div class="quiz px-4 mb-4">
+                        <h4 class="fw-bold mb-0">Quiz</h4>
+                        <p>{{ value.title}}</p>
+                    </div>
+                    <div class="cuscard px-4">
+                        <div class="card">
+                            <label for="">Time</label>
+                            <h4><i class="fa fa-clock"></i> <span id="timer">00:00</span> / <small>{{duration_time|safe}}:00</small></h4>
+<!--                            <div class="progress">-->
+<!--                                <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>-->
+<!--                            </div>-->
+                        </div>
+
+                        <div class="card">
+                            <label for="">Question</label>
+                            <h4><i class="fa fa-circle-question"></i> {{request.session.count}} / <small>{{request.session.all_ques_count}}</small></h4>
+<!--                            <div class="progress">-->
+<!--                                <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>-->
+<!--                            </div>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="rightbar d-flex flex-column">
+                <div class="cushead flex-wrap">
+                    <h2 class="fw-bold mb-0 flex-grow-1">Started Test</h2>
+                    <p>Please give your answer.</p>
+                </div>
+                <form id="msform" action="submitanswer" method="post" enctype="multipart/form-data" >
+                    {% csrf_token %}
+                      <input type="hidden" id="auto_submi" name="auto_submit_form" value="False">
+                      <input type="hidden" id="current_page"  value="True">
+                     {% for key,value in myList.items %}
+                     <div class="rightbar_inner flex-grow-1 d-flex flex-column">
+                    <div class="question-ans flex-grow-1">
+                        <div class="ques">
+                            <span>{{request.session.count}}</span>
+                            <h4>{{key|safe}}</h4>
+                             <textarea name="question" class="d-none">{{ key }}</textarea>
+                        </div>
+
+                        {% if img1 %}
+                          <div class="form-check">
+                                    <input type="radio" class="form-check-input" value="{{img1}}" name="answer" id="customRadis1">
+                                    <img src="{{img1.url}}" width="350px" height="250px"> <br><br>
+                                     <input type="radio" class="form-check-input" value="{{img2}}" name="answer" id="customRais1">
+                                    <img src="{{img2.url}}" width="350px" height="250px"> <br><br>
+                                     <input type="radio" class="form-check-input" value="{{img3}}" name="answer" id="custoRadis1">
+                                    <img src="{{img3.url}}" width="350px" height="250px"><br><br>
+                                     <input type="radio" class="form-check-input" value="{{img4}}" name="answer" id="gyyg">
+                                    <img src="{{img4.url}}" width="350px" height="250px">
+                                </div>
+                        {% else %}
+                           {% if value %}
+                        <div class="answer">
+                              {% for j in value %}
+                            <div class="form-group cusradio">
+                                <div class="form-check">
+                                    <input type="radio" class="form-check-input" value="{{j}}" name="answer" id="customRadio1">
+                                    <label class="form-check-label" for="customRadio1">{{j}}</label>
+                                </div>
+
+ {% endfor %}
+                                 <div class="note">
+                                    <p><small><i>One answer accepted.</i></small></p>
+                                </div>
+                           </div>
+                        </div>
+
+   {% else %}
+
+
+                           <div class="answer">
+                                       <div class="form-group">
+                                            <textarea name="answer" id="editor1" rows="10" cols="80" placeholder="Enter you answer here" ></textarea>
+                                           <span class="description"><small><i>Maximum 150 words</i></small></span>
+            <script>
+                // Replace the <textarea id="editor1"> with a CKEditor 4
+                // instance, using default configuration.
+                CKEDITOR.replace( 'editor1' );
+            </script>
+                            </div>
+
+                           </div>
+                            {% endif %}
+
+                        {% endif %}
+
+
+                            </div>
+                        </div>
+
+                         {% endfor %}
+                    <div class="next-btn text-end pt-4">
+                        <button type="submit" class="btn btn-primary cusbtn btn-sm px-5 py-3 text-uppercase fw-bold">Next</button>
+                    </div>
+                </div>
+                </form>
+            </div>
+        </div>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
+<script>
+document.addEventListener('visibilitychange', function(){
+        document.title = document.visibilityState;
+        console.log(document.visibilityState);
+        title = document.visibilityState
+        current_page = document.getElementById("current_page").value;
+
+
+        if (title =='hidden'){
+            alert('You test is over')
+        }
+        else if (title == 'visible' || current_page === "True"){
+           document.getElementById("auto_submi").setAttribute('value','True')
+
+           document.getElementById("msform").submit();
+        }
+});
+    if(localStorage.getItem("count_timer")){
+        var count_timer = localStorage.getItem("count_timer");
+    } else {
+        var count_timer = 60*{{duration_time|safe}};
+    }
+    var minutes = parseInt(count_timer/60);
+    var seconds = parseInt(count_timer%60);
+    function countDownTimer(){
+        if(seconds < 10){
+            seconds= "0"+ seconds ;
+        }if(minutes < 10){
+            minutes= "0"+ minutes ;
+        }
+
+        document.getElementById("timer").innerHTML = " "+minutes+" : "+seconds+" ";
+
+        if(count_timer <= 0){
+             localStorage.clear("count_timer");
+              document.getElementById("ajax_button").disabled = true;
+
+               document.getElementById("tr").innerHTML="u can not submit your task now";
+               document.getElementById("auto_submi").setAttribute('value','True')
+               document.getElementById("msform").submit();
+               console.log("sasasa")
+
+
+
+        } else {
+            count_timer = count_timer -1 ;
+            minutes = parseInt(count_timer/60);
+            seconds = parseInt(count_timer%60);
+            localStorage.setItem("count_timer",count_timer);
+            setTimeout("countDownTimer()",1000);
+        }
+    }
+    setTimeout("countDownTimer()",1000);
+
+
+
+
+
+</script>
+</body>
+</html>

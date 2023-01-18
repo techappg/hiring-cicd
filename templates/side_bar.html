@@ -1,0 +1,283 @@
+{% load static %}
+<div id="global-loader">
+   <img src="{% static 'images/loader.svg' %}" class="loader-img" alt="Loader">
+</div>
+<!-- /GLOBAL-LOADER -->
+<div class="page">
+    <div class="page-main">
+       <!-- app-Header -->
+        <div class="app-header header sticky">
+          <div class="container-fluid main-container">
+             <div class="d-flex">
+                <a aria-label="Hide Sidebar" class="app-sidebar__toggle" data-bs-toggle="sidebar" href="javascript:void(0)"></a>
+                <!-- sidebar-toggle-->
+                <!--                        <a class="logo-horizontal " href="index.html">-->
+                <!--                            <img src="{% static 'images/brand/logo.png' %}" class="header-brand-img desktop-logo" alt="logo">-->
+                <!--                            <img src="{% static 'images/brand/logo-3.png' %}" class="header-brand-img light-logo1"-->
+                <!--                                alt="logo">-->
+                <!--                        </a>-->
+                <!-- LOGO -->
+                <div class="main-header-center ms-3 d-none d-lg-block">
+                   <input class="form-control" placeholder="Search for results..." type="search">
+                   <button class="btn px-0 pt-2"><i class="fe fe-search" aria-hidden="true"></i></button>
+                </div>
+                <div class="d-flex order-lg-2 ms-auto header-right-icons">
+                   <div class="dropdown d-none">
+                      <a href="javascript:void(0)" class="nav-link icon" data-bs-toggle="dropdown">
+                      <i class="fe fe-search"></i>
+                      </a>
+                      <div class="dropdown-menu header-search dropdown-menu-start">
+                         <div class="input-group w-100 p-2">
+                            <input type="text" class="form-control" placeholder="Search....">
+                            <div class="input-group-text btn btn-primary">
+                               <i class="fe fe-search" aria-hidden="true"></i>
+                            </div>
+                         </div>
+                      </div>
+                   </div>
+                   <!-- SEARCH -->
+                   <button class="navbar-toggler navresponsive-toggler d-lg-none ms-auto" type="button"
+                      data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent-4"
+                      aria-controls="navbarSupportedContent-4" aria-expanded="false"
+                      aria-label="Toggle navigation">
+                   <span class="navbar-toggler-icon fe fe-more-vertical"></span>
+                   </button>
+                   <div class="navbar navbar-collapse responsive-navbar p-0">
+                      <div class="collapse navbar-collapse" id="navbarSupportedContent-4">
+                         <div class="d-flex order-lg-2">
+                            <div class="dropdown d-lg-none d-flex">
+                               <a href="javascript:void(0)" class="nav-link icon" data-bs-toggle="dropdown">
+                               <i class="fe fe-search"></i>
+                               </a>
+                               <div class="dropdown-menu header-search dropdown-menu-start">
+                                  <div class="input-group w-100 p-2">
+                                     <input type="text" class="form-control" placeholder="Search....">
+                                     <div class="input-group-text btn btn-primary">
+                                        <i class="fa fa-search" aria-hidden="true"></i>
+                                     </div>
+                                  </div>
+                               </div>
+                            </div>
+                            <!-- SIDE-MENU -->
+                            <div class="dropdown d-flex profile-1">
+                               <a href="javascript:void(0)" data-bs-toggle="dropdown" class="nav-link leading-none d-flex">
+                               <img src="{% static 'images/users/21.png' %}" alt="profile-user"
+                                  class="avatar  profile-user brround bg-transparent cover-image">
+                               </a>
+                               <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                  <div class="drop-heading">
+                                     <div class="text-center">
+                                        {{request.user}}
+                                        <h5 class="text-dark mb-0 fs-14 fw-semibold"></h5>
+                                     </div>
+                                  </div>
+                                  <div class="dropdown-divider m-0"></div>
+                                  <a class="dropdown-item" href="/update">
+                                  <i class="dropdown-icon fe fe-user"></i> Profile
+                                  </a>
+                                  <a class="dropdown-item" href="/profile_logout">
+                                  <i class="dropdown-icon fe fe-alert-circle"></i> Sign out
+                                  </a>
+                               </div>
+                            </div>
+                         </div>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+        </div>
+        <div class="sticky">
+            <div class="app-sidebar__overlay" data-bs-toggle="sidebar"></div>
+            <div class="app-sidebar">
+               <div class="side-header">
+                  <a class="header-brand1" href="#">
+                  <img src="{% static 'images/brand/logo.png' %}" class="header-brand-img desktop-logo" alt="logo">
+                  <img src="{% static 'images/brand/logo-1.png' %}" class="header-brand-img toggle-logo"
+                     alt="logo">
+                  <img src="{% static 'images/brand/logo-2.png' %}" class="header-brand-img light-logo" alt="logo">
+                  <img src="{% static 'images/brand/logo.png' %}" class="header-brand-img light-logo1"
+                     alt="logo">
+                  </a>
+                  <!-- LOGO -->
+               </div>
+               <div class="main-sidemenu">
+                  <div class="slide-left disabled" id="slide-left">
+                     <svg xmlns="http://www.w3.org/2000/svg' %}
+                        fill="#7b8191" width="24" height="24" viewBox="0 0 24 24">
+                        <path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z" />
+                     </svg>
+                  </div>
+                  <ul class="side-menu">
+                     <li class="sub-category">
+                        <h3>Main</h3>
+                     </li>
+                     <li class="slide">
+                        <a class="side-menu__item" data-bs-toggle="slide" href="/dashboard_index"><i
+                           class="side-menu__icon fe fe-home"></i><span
+                           class="side-menu__label">Dashboard</span></a>
+                     </li>
+
+                     {% if request.user.is_superuser %}
+                     <li class="slide">
+                        <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i
+                           class="side-menu__icon fe fe-slack"></i><span
+                           class="side-menu__label">Department</span><i
+                           class="angle fe fe-chevron-right"></i></a>
+                        <ul class="slide-menu">
+                           <li class="side-menu-label1"><a href="javascript:void(0)">Departments</a></li>
+                           <!--                                    <li><a href="add_language" class="slide-item"> add language</a></li>-->
+                           <li><a href="/get_language" class="slide-item"> view all Departments</a></li>
+                        </ul>
+                     </li>
+                     <li class="slide">
+                        <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i
+                           class="side-menu__icon fe fe-package"></i><span
+                           class="side-menu__label">Task Level</span><i
+                           class="angle fe fe-chevron-right"></i></a>
+                        <ul class="slide-menu">
+                           <li class="side-menu-label1"><a href="javascript:void(0)">Task Level</a></li>
+                           <!--                                    <li><a href="add_level" class="slide-item"> Add level</a></li>-->
+
+                           <li><a href="/get_level" class="slide-item">View level</a></li>
+                        </ul>
+                     </li>
+<!--                     <li class="sub-category">-->
+<!--&lt;!&ndash;                        <h3>Pre-build Pages</h3>&ndash;&gt;-->
+<!--                     </li>-->
+                     <li class="slide">
+                        <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i
+                           class="side-menu__icon fe fe-user"></i><span
+                           class="side-menu__label">Company</span><i
+                           class="angle fe fe-chevron-right"></i></a>
+                        <ul class="slide-menu">
+                           <li class="side-menu-label1"><a href="javascript:void(0)">Company</a></li>
+                           <!--                                    <li><a href="register" class="slide-item">Add Companies</a></li>-->
+                           <li><a href="/get_allcompanies" class="slide-item">View All Companies</a></li>
+                        </ul>
+                     </li>
+                     <li class="slide">
+                        <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i
+                           class="side-menu__icon fe fe-help-circle"></i><span
+                           class="side-menu__label">Questions</span><i
+                           class="angle fe fe-chevron-right"></i></a>
+                        <ul class="slide-menu">
+                           <li class="side-menu-label1"><a href="javascript:void(0)">Questions</a></li>
+                           <li><a href="/upload_file" class="slide-item"> upload file</a></li>
+                           <li><a href="/add_questions" class="slide-item">Add Question</a></li>
+                           <li><a href="/create_sample_paper" class="slide-item">View Questions</a></li>
+                           <li><a href="/display_sample_paper" class="slide-item"> view sample paper</a></li>
+                        </ul>
+                     </li>
+                     <li class="slide">
+                        <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i
+                           class="side-menu__icon fe fe-clipboard"></i><span
+                           class="side-menu__label">Interviwee</span><i
+                           class="angle fe fe-chevron-right"></i></a>
+                        <ul class="slide-menu">
+                           <li class="side-menu-label1"><a href="javascript:void(0)">INTERVIWEE</a></li>
+                           <li><a href="/add_interviwee" class="slide-item">Add Interviwee</a></li>
+                           <li><a href="/all_record_interviwee/all" class="slide-item">Interviwee Record</a></li>
+                        </ul>
+                     </li>
+                     <li class="slide">
+                         <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i
+                            class="side-menu__icon fe fe-user-plus"></i><span
+                            class="side-menu__label">Add HR</span><i
+                            class="angle fe fe-chevron-right"></i></a>
+                         <ul class="slide-menu">
+                            <li><a href="/add_hr" class="slide-item">create HR</a></li>
+                            <li><a href="/all_hr" class="slide-item">view hr</a></li>
+                            <!--                                    <li><a href="get_allcompanies" class="slide-item">View All Companies</a></li>-->
+                         </ul>
+                      </li>
+                      {% elif request.user.is_HR %}
+                     <li class="slide">
+                        <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i
+                           class="side-menu__icon fe fe-layers"></i><span
+                           class="side-menu__label">Interviwee</span><i
+                           class="angle fe fe-chevron-right"></i></a>
+                        <ul class="slide-menu">
+                           <li class="side-menu-label1"><a href="javascript:void(0)">INTERVIWEE</a></li>
+                           <li><a href="/add_interviwee" class="slide-item">Add Interviwee</a></li>
+                           <li><a href="/all_record_interviwee/all" class="slide-item">Interviwee Record</a></li>
+
+                        </ul>
+                     </li>
+                     {% elif request.user.is_company%}
+                     <li class="slide">
+                        <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i
+                           class="side-menu__icon fe fe-slack"></i><span
+                           class="side-menu__label">Departments</span><i
+                           class="angle fe fe-chevron-right"></i></a>
+                        <ul class="slide-menu">
+                           <li class="side-menu-label1"><a href="javascript:void(0)">Departments</a></li>
+                           <!--                                   /<li><a href="add_language" class="slide-item"> add language</a></li>-->
+                           <li><a href="/get_language" class="slide-item"> view all Departments</a></li>
+                        </ul>
+                     </li>
+                     <li class="slide">
+                        <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i
+                           class="side-menu__icon fe fe-package"></i><span
+                           class="side-menu__label">Task Level</span><i
+                           class="angle fe fe-chevron-right"></i></a>
+                        <ul class="slide-menu">
+                           <li class="side-menu-label1"><a href="javascript:void(0)">Task Level</a></li>
+                           <!--                                    <li><a href="add_level" class="slide-item"> Add level</a></li>-->
+                           <li><a href="/get_level" class="slide-item">View level</a></li>
+                        </ul>
+                     </li>
+<!--                     <li class="sub-category">-->
+<!--                        <h3>Pre-build Pages</h3>-->
+<!--                     </li>-->
+                     <li class="slide">
+                        <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i
+                           class="side-menu__icon fe fe-layers"></i><span
+                           class="side-menu__label">Questions</span><i
+                           class="angle fe fe-chevron-right"></i></a>
+                        <ul class="slide-menu">
+                            <li><a href="/upload_file" class="slide-item"> upload file</a></li>
+                           <li class="side-menu-label1"><a href="javascript:void(0)">Questions</a></li>
+                           <li><a href="/add_questions" class="slide-item">Add Question</a></li>
+                           <li><a href="/create_sample_paper" class="slide-item">View Questions</a></li>
+                           <li><a href="/display_sample_paper" class="slide-item"> view sample paper</a></li>
+                        </ul>
+                     </li>
+                     <li class="slide">
+                        <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i
+                           class="side-menu__icon fe fe-layers"></i><span
+                           class="side-menu__label">Interviwee</span><i
+                           class="angle fe fe-chevron-right"></i></a>
+                        <ul class="slide-menu">
+                           <li class="side-menu-label1"><a href="javascript:void(0)">INTERVIWEE</a></li>
+                           <li><a href="/add_interviwee" class="slide-item">Add Interviwee</a></li>
+                           <li><a href="/all_record_interviwee/all" class="slide-item">Interviewee Test Record</a></li>
+
+                           <!--                                    <li><a href="get_allcompanies" class="slide-item">View All Companies</a></li>-->
+                        </ul>
+                     </li>
+                     <li class="slide">
+                        <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i
+                           class="side-menu__icon fe fe-layers"></i><span
+                           class="side-menu__label">Add HR</span><i
+                           class="angle fe fe-chevron-right"></i></a>
+                        <ul class="slide-menu">
+                           <li><a href="/add_hr" class="slide-item">create HR</a></li>
+                           <li><a href="/all_hr" class="slide-item">view hr</a></li>
+                           <!--                                    <li><a href="get_allcompanies" class="slide-item">View All Companies</a></li>-->
+                        </ul>
+                     </li>
+                  </ul>
+
+                    {% endif %}
+               </div>
+            </div>
+            <!--/APP-SIDEBAR-->
+        </div>
+
+       <div class="main-content app-content mt-0">
+           <div class="side-app">
+              <div class="main-container container-fluid">
+              </div>
+
+

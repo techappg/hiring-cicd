@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static%}
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    {% include 'css_file.html' %}
+</head>
+
+<body class="app sidebar-mini ltr light-mode">
+    <!--Sidebar start-->
+    {% include 'side_bar.html' %}
+
+    <div class="page-header">
+       <h1 class="page-title">All Sample Paper</h1>
+       <div>
+          <ol class="breadcrumb">
+             <li class="breadcrumb-item"><a href="/dashboard_index">Home</a></li>
+             <li class="breadcrumb-item active" aria-current="page">test record</li>
+          </ol>
+       </div>
+    </div>
+
+
+    <div class="main-container">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">All Interviwee</h3>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table border text-nowrap text-md-nowrap table-bordered mb-3">
+                        <thead>
+                            <tr>
+                                <th class="text-center" width="70px">Sr. no</th>
+                                <th>language</th>
+                                <th>title</th>
+                                <th class="text-center" width="100px">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {%  for i in all_sample %}
+                            <tr>
+                                <td class="text-center">{{forloop.counter}}</td>
+                                <td>{{i.language}}</td>
+                                <td>{{i.title}}</td>
+                                <td class="text-center"><a href="all_sample_paper/{{i.id}}" class="btn btn-sm btn-primary" title="View" data-toggle="tooltip"><i class="fe fe-eye"></i></a></td>
+                            </tr>
+                            {%endfor%}
+                        {% if not all_sample %}
+                        <tr>
+                            <td colspan="8" class="text-danger"><center>This company has not created any Sample Paper. </center></td></tr>
+                        {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    {% include 'footer.html' %}
+
+    <!-- JQUERY JS -->
+    {% include 'js.html' %}
+    {% block js %}
+    {% endblock %}
+</body>
+</html>

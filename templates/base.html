@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    {% include 'css_file.html' %}
+    <style>
+        .form-control{
+            background:linear-gradient(135deg, #f8f8fc 0%,#f0f0f8 100%);
+        }
+        label {
+          color: black;
+        }
+    </style>
+</head>
+
+<body style="background:linear-gradient(135deg, #efefef 0%,#dcdcdc 100%);color:black;">
+    <!-- Main wrapper start -->
+    <div id="main-wrapper">
+
+        <!--Sidebar start-->
+        {% include 'side_bar.html' %}
+        {% include 'navbar.html' %}
+        <!--Sidebar end-->
+        <!--Content body start-->
+    </div>
+    <!--Main wrapper end-->
+    {% include 'js.html' %}
+    {% block js %}
+    {% endblock %}
+</body>
+
+</html>

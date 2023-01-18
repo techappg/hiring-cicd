@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+{% load static%}
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    {% include 'css_file.html' %}
+</head>
+
+<body class="app sidebar-mini ltr light-mode">
+    <!--Sidebar start-->
+    {% include 'side_bar.html' %}
+
+    <div class="page-header">
+       <h1 class="page-title">Interviewee Details</h1>
+       <div>
+          <ol class="breadcrumb">
+             <li class="breadcrumb-item"><a href="/dashboard_index">Home</a></li>
+             <li class="breadcrumb-item active" aria-current="page">Interviewee</li>
+          </ol>
+       </div>
+    </div>
+
+
+    <div class="main-container">
+         <form method="POST" class="post-form"  enctype="multipart/form-data" id="personForm" data-cities-url="{% url 'dummy' %}" >
+            {% csrf_token %}
+            <div class="card">
+                <div class="card-header justify-content-between">
+                    <h3 class="card-title">Interviwee Details </h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <label class="form-label">Interviwee Name <span class="text-red">*</span></label>
+                                <input type="text" name="name" class="form-control" placeholder="name" required>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <label class="form-label">Link Expire Time(in days) <span class="text-red">*</span></label>
+                                <input type="date" name="expire" class="form-control" placeholder="enteer link expiration time" required>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <label class="form-label">Phone_no <span class="text-red">*</span></label>
+                                <input type="text" name="phone_no" class="form-control"  pattern="[6-9]{1}[0-9]{9}" title="Phone number with 6 and remaing 9 digit with 0-9 " placeholder="phone.no" required/>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <label class="form-label">Email address <span class="text-red">*</span></label>
+                                <input type="email" name="email" class="form-control" placeholder="Email  address " required/>
+                                {% if already_exists %}
+                                    <p class="error">Email alreadys exists</p>
+                                    {% endif %}
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <label class="form-label">Password<span class="text-red">*</span></label>
+                                <input type="text"  name="interviwee_Password" class="form-control" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"  placeholder="Password" required/>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <label class="form-label">Upload Cv<span class="text-red">*</span></label>
+                                <input type="file" id="file-upload-input"  name="cv_file" accept=".png" placeholder="uplaodcv" required>
+                                <span id="file_error"></span>
+
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <label class="form-label">Experience Level<span class="text-red">*</span></label>
+                                <select id="Experience" class="form-control" name="level_task"  required>
+                                    <option value="Select Experience">Select Experience</option>
+                                    {% for i in all_level %}
+                                        <option value="{{i.0|title}}">{{i.0|title}}</option>
+                                    {% endfor %}
+                                 </select>
+                            </div>
+                        </div>
+
+                         <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-label">Select Department<span class="text-red">*</span></label>
+                                <select id="task" class="form-control" name="task_language" required>
+                                    <option value="Select Language">Select Department</option>
+                                    {% for element in all_task_languages %}
+                                    <option value="{{element.0|title}}">{{element.0|title}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                         </div>
+                        <div id="sample_paper1" class="col-md-6" >
+                        </div>
+                        </div>
+
+
+                     </div>
+
+
+
+                     <div class="btn-list text-end">
+                        <button type="submit" onclick="file_validation()" class="btn btn-success cusbtn ">Submit</button>
+                     </div>
+                </div>
+            </div>
+         </form>
+
+    <script>
+        let file=document.getElementById("file-upload-input");
+        console.log(file.value.split('.')[1]);
+         let arr=['jpg','jpeg','png','pdf','doc']
+
+        if(arr.indexOf(file.value.split('.')[1])){
+        console.log('successs');
+        }
+        else{
+         console.log('ok');
+        }
+
+
+</script>
+    </div>
+
+
+<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-0">
+      <div class="modal-body alert alert-success">
+        <div id="content"></div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+{% if added %}
+<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-0">
+      <div class="modal-body alert alert-success">
+        <h4 class="mb-0">Email Sent Sucessfully</h4>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+
+
+
+{% include 'footer.html' %}
+
+    <!-- JQUERY JS -->
+    {% include 'js.html' %}
+    {% block js %}
+    {% endblock %}
+
+
+
+
+<script>
+var exp;
+    $("#Experience").change(function () {
+      var url = $("#personForm").attr("data-cities-url");
+      exp = $(this).val();
+
+    });
+
+    $("#task").change(function () {
+      var url = $("#personForm").attr("data-cities-url");
+      var languageId = $(this).val();
+      console.log('here',languageId)
+      console.log('here',exp)
+
+
+      $.ajax({
+        url: url,
+        type:"GET",
+        data: {
+          'language':languageId,
+          'level': exp
+        },
+        success: function (data) {
+          $("#sample_paper1").html(data);
+
+          }
+      });
+  $("#sample_paper2").removeClass("d-none");
+    });
+
+  </script>
+<script>
+    console.log("hello");
+    $(window).on('load', function() {
+        $('#exampleModal1').modal('show');
+    });
+</script>
+<script>
+
+function myFunction () {
+    var x = document.getElementById("sample");
+    var strUser = x.value;
+    console.log(strUser)
+
+
+
+      $.ajax({
+        url: "/get_sample_paper_details/"+ strUser,
+        type:"get",
+        data: {
+          'id':strUser,
+
+        },
+        success: function (data) {
+
+          $("#content").html(data);}
+      });
+
+    };
+
+</script>
+</body>
+</html>

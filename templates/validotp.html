@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+    <!-- META DATA -->
+    <meta charset="UTF-8">
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0'>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    {% load static %}
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'images/brand/logo-2.png" />
+    <title>Login || Visiontrek Communication</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js' %}" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js' %}" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js' %}" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link id="style" href="{% static 'plugins/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/style.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/icons.css' %}" rel="stylesheet" />
+    <link id="theme" rel="stylesheet" type="text/css' %}" media="all" href="{% static 'colors/color1.css' %}" />
+    <link href="{% static 'css/custom.css' %}" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css' %}" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body class="app sidebar-mini ltr">
+    <form method="POST" class="post-form">
+        {% csrf_token %}
+        <div class="login-img">
+            <div id="global-loader">
+                <img src="{% static 'images/loader.svg' %}" class="loader-img" alt="Loader">
+            </div>
+            <div class="page">
+                <div class="">
+                    <div class="col col-login mx-auto mt-7">
+                        <div class="text-center">
+                            <a href="/">
+                                <img src="{% static 'images/brand/logo.png' %}" class="img-fluid header-brand-img" alt="Visiontrek Communication" />
+                            </a>
+                        </div>
+                    </div>
+                  <div class="container">
+                      <div class="row">
+                          <div class="col-4 mt-3 offset-4">
+                                   {% if messages %}
+                                   <div class="alert alert-dark alert-dismissible fade show" role="alert">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-octagon-fill" viewBox="0 0 16 16">
+                                                  <path d="M11.46.146A.5.5 0 0 0 11.107 0H4.893a.5.5 0 0 0-.353.146L.146 4.54A.5.5 0 0 0 0 4.893v6.214a.5.5 0 0 0 .146.353l4.394 4.394a.5.5 0 0 0 .353.146h6.214a.5.5 0 0 0 .353-.146l4.394-4.394a.5.5 0 0 0 .146-.353V4.893a.5.5 0 0 0-.146-.353L11.46.146zM8 4c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995A.905.905 0 0 1 8 4zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                                                </svg>
+                                                                                      {% for message in messages %}
+                                            <strong>oops error!</strong><li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                                            {% endfor %}
+                                                         <button type="button" class="close h-100" data-dismiss="alert" aria-label="Close">
+                                   </div>
+                            {% endif %}
+                          </div>
+                      </div>
+                  </div>
+                    <div class="container-login100">
+                        <div class="wrap-login100 p-6">
+                            <div class="login100-form validate-form">
+                                <span class="pb-5 fs-5" >
+
+                                   Please check your email and enter the otp
+                                </span>
+                                <div class="panel panel-primary">
+                                    <div class="panel-body tabs-menu-body p-0">
+
+                                        <div class="tab-content">
+                                            <div class="tab-pane active" id="tab5">
+
+                                              {% if mail %}
+                                                  <div class="wrap-input100 validate-input input-group" >
+                                                    <a href="javascript:void(0)" class="input-group-text bg-white text-muted">
+                                                        <i class="zmdi zmdi-email text-muted" aria-hidden="true"></i>
+                                                    </a>
+
+                                                    <input class="input100 border-start-0 form-control ms-0" type="text" name="email" placeholder="enter your email" required/>
+                                                </div>
+
+                                              {% endif %}
+
+                                                <div class="wrap-input100 validate-input input-group" >
+                                                    <a href="javascript:void(0)" class="input-group-text bg-white text-muted">
+                                                        <i class="zmdi zmdi-email text-muted" aria-hidden="true"></i>
+                                                    </a>
+
+                                                    <input class="input100 border-start-0 form-control ms-0" type="text" name="otp" placeholder="enter your otp" required/>
+                                                </div>
+
+                                                <div class="pt-1 mb-2">
+                                                 <button class="btn btn-primary btn-block cusbtn" type="submit">Submit</button>
+                                               </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <!-- JQUERY JS -->
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <!-- BOOTSTRAP JS -->
+    <script src="{% static 'plugins/bootstrap/js/popper.min.js' %}"></script>
+    <script src="{% static 'plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+    <!-- SHOW PASSWORD JS -->
+    <script src="{% static 'js/show-password.min.js' %}"></script>
+    <!-- GENERATE OTP JS -->
+    <script src="{% static 'js/generate-otp.js' %}"></script>
+    <!-- Perfect SCROLLBAR JS-->
+    <script src="{% static 'plugins/p-scroll/perfect-scrollbar.js' %}"></script>
+    <!-- Color Theme js -->
+    <script src="{% static 'js/themeColors.js' %}"></script>
+    <!-- CUSTOM JS -->
+    <script src="{% static 'js/custom.js' %}"></script>
+</body>
+</html>

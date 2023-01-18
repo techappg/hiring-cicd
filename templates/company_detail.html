@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static%}
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    {% include 'css_file.html' %}
+</head>
+
+<body class="app sidebar-mini ltr light-mode">
+    <!--Sidebar start-->
+    {% include 'side_bar.html' %}
+
+    <div class="page-header">
+       <h1 class="page-title">Company Detail</h1>
+       <div>
+          <ol class="breadcrumb">
+             <li class="breadcrumb-item"><a href="/dashboard_index">Home</a></li>
+             <li class="breadcrumb-item active" aria-current="page">Company Profile</li>
+          </ol>
+       </div>
+    </div>
+
+                    <!-- CONTAINER -->
+                    <div class="main-container container-fluid">
+
+
+
+                                        <div class="col-sm-6 col-md-6">
+                                            <div class="form-group">
+                                                    <label class="form-label">Company Name <span class="text-red"></span></label>
+                                                    <input type="text" value="{{get_value.company_Name}}" name="name" class="form-control" >
+                                            </div>
+
+                                        </div>
+
+
+                                        <div class="col-sm-6 col-md-6">
+                                            <div class="form-group">
+                                                     <label class="form-label">Company Address<span class="text-red"></span></label>
+                                                    <input type="text" value="{{get_value.company_address}}" name="name" class="form-control" >
+                                            </div>
+
+                                          </div>
+
+                                        <div class="col-sm-6 col-md-6">
+                                            <div class="form-group">
+                                                    <label class="form-label">Company Phone.no<span class="text-red"></span></label>
+                                                    <input type="text" value="{{get_value.company_phone_no}}" name="name" class="form-control" >
+                                                </div>
+
+                                        </div>
+
+                                        {% if get_value.is_active %}
+
+                                        <div class="btn-list">
+                                            <a href="/deactivate/{{get_value.id}}"button type="button" class="btn btn-success btn-pill">Deactivate</button></a>
+                                        </div>
+                                       {% else %}
+                                        <div class="btn-list">
+                                            <a href="/activate/{{get_value.id}}"button type="button" class="btn btn-success btn-pill">activate</button></a>
+                                        </div>
+
+                                      {% endif %}
+
+                    </div>
+                </div>
+            </div>
+
+ {% include 'footer.html' %}
+
+    <!-- JQUERY JS -->
+    {% include 'js.html' %}
+    {% block js %}
+    {% endblock %}
+</body>
+</html>

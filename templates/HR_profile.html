@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static%}
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    {% include 'css_file.html' %}
+</head>
+
+<body class="app sidebar-mini ltr light-mode">
+    <!--Sidebar start-->
+    {% include 'side_bar.html' %}
+
+    <div class="page-header">
+       <h1 class="page-title">Add Hr Record</h1>
+       <div>
+          <ol class="breadcrumb">
+             <li class="breadcrumb-item"><a href="/dashboard_index">Home</a></li>
+             <li class="breadcrumb-item active" aria-current="page">Hr Details</li>
+          </ol>
+       </div>
+    </div>
+
+    <div class="main-container">
+        <form method="POST" class="post-form">
+            {% csrf_token %}
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">HR Profile</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="form-label">First Name <span class="text-red">*</span></label>
+                                <input type="text" name="first_name" value="{{hrfirst_name}}" class="form-control"  placeholder="enter first name" required/>
+                            </div>
+
+
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="form-label">Last Name <span class="text-red">*</span></label>
+                                <input type="text" name="last_name" value="{{hrlast_name}}" class="form-control" placeholder="enter last name" required/>
+                            </div>
+
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-label">Phone.no<span class="text-red">*</span></label>
+                                <input type="text"  name="hr_phoneno" value="{{hr_phoneno}}" class="form-control"  pattern="[7-9]{1}[0-9]{9}" title="Phone number with 7-9 and remaning 9 digit with 0-9" placeholder="phone.no" required/>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-label">Email address <span class="text-red">*</span></label>
+                                <input type="email" name="hr_email" value="{{hr_email}}" class="form-control" placeholder="Email  address " required/>
+                            </div>
+                            {% if  email %}
+                                                    <span class="text-danger"> Email already exists</span>
+                                                    {% endif %}
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="form-label">Password<span class="text-red">*</span></label>
+                                <input type="text"  name="hr_password" value="{{hr_password}}" class="form-control" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"  placeholder="Password"  required/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="btn-list text-end">
+                        <button class="btn btn-primary mt-4 cusbtn mb-0">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+{% if added %}
+<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-0">
+      <div class="modal-body alert alert-success">
+        <h4 class="mb-0">Added Sucessfully</h4>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+
+{% include 'footer.html' %}
+
+    <!-- JQUERY JS -->
+    {% include 'js.html' %}
+    {% block js %}
+    {% endblock %}
+<script>
+    console.log("hello");
+    $(window).on('load', function() {
+        $('#exampleModal1').modal('show');
+    });
+</script>
+</body>
+</html>

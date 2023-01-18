@@ -1,0 +1,88 @@
+
+<!DOCTYPE html>
+<html lang="en">
+{% load static%}
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    {% include 'css_file.html' %}
+</head>
+
+<body class="app sidebar-mini ltr light-mode">
+    <!--Sidebar start-->
+    {% include 'side_bar.html' %}
+
+    <div class="page-header">
+       <h1 class="page-title">Language</h1>
+       <div>
+          <ol class="breadcrumb">
+             <li class="breadcrumb-item"><a href="/dashboard_index">Home</a></li>
+             <li class="breadcrumb-item active" aria-current="page">Language</li>
+          </ol>
+       </div>
+    </div>
+
+
+
+            <!--app-content open-->
+            <div class="main-content app-content mt-0">
+                <div class="side-app">
+
+                    <!-- CONTAINER -->
+                    <div class="main-container container-fluid">
+
+                        <form method="POST" class="post-form">
+                      {% csrf_token %}
+                                     <div class="col-sm-6 col-md-6">
+                                                <div class="form-group">
+                                                    <label class="form-label">company name <span class="text-red">*</span></label>
+                                                    <input type="text" name= "company_Name" value="{{ get_value.company_Name|title}}" class="form-control" placeholder="add level" >
+                                                </div>
+                                     </div>
+                                     <div class="col-sm-6 col-md-6">
+                                                <div class="form-group">
+                                                    <label class="form-label">Mobile no <span class="text-red">*</span></label>
+                                                    <input type="text" name= "company_phone_no" value="{{get_value.company_phone_no}}" class="form-control" placeholder="add level" required>
+                                                </div>
+                                     </div>
+
+
+                                     <div class="col-sm-6 col-md-6">
+                                                <div class="form-group">
+                                                    <label class="form-label">Email<span class="text-red">*</span></label>
+                                                    <input type="text" name= "company_email" value="{{get_value.company_email}}" class="form-control" placeholder="add level" required>
+                                                </div>
+                                     </div>
+
+                                   <div class="col-sm-6 col-md-6">
+                                                <div class="form-group">
+                                                    <label class="form-label">State<span class="text-red">*</span></label>
+                                                    <input type="text" name= "company_state" value="{{get_value.company_state}}" class="form-control" placeholder="add level" required>
+                                                </div>
+                                     </div>
+
+
+                                   <div class="col-sm-6 col-md-6">
+                                                <div class="form-group">
+                                                    <label class="form-label">Address<span class="text-red">*</span></label>
+                                                    <input type="text" name= "company_address" value="{{get_value.company_address}}" class="form-control" placeholder="add level" required>
+                                                </div>
+                                     </div>
+                                    <div class="btn-list">
+                                        <button type="submit" class="btn btn-success btn-pill">UPDATE</button>
+                                    </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+ {% include 'footer.html' %}
+
+    <!-- JQUERY JS -->
+    {% include 'js.html' %}
+    {% block js %}
+    {% endblock %}
+</body>
+</html>

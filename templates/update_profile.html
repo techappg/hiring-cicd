@@ -1,0 +1,94 @@
+
+<!DOCTYPE html>
+<html lang="en">
+{% load static%}
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    {% include 'css_file.html' %}
+</head>
+
+<body class="app sidebar-mini ltr light-mode">
+    <!--Sidebar start-->
+    {% include 'side_bar.html' %}
+
+    <div class="page-header">
+       <h1 class="page-title">Update Profile</h1>
+       <div>
+          <ol class="breadcrumb">
+             <li class="breadcrumb-item"><a href="/dashboard_index">Home</a></li>
+             <li class="breadcrumb-item active" aria-current="page">profile</li>
+          </ol>
+       </div>
+    </div>
+
+
+    <div class="main-container">
+        {% if updated %}
+        <div class="alert alert-success" role="alert">update changes seccuesfully</div>
+        {% endif %}
+
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Update Profile</h3>
+            </div>
+            <div class="card-body">
+                <form method="POST" class="post-form">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-label">username <span class="text-red">*</span></label>
+                                <input type="text" name= "username" value="{{user.username}}" class="form-control" placeholder="name" readonly>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-label">Mobile no <span class="text-red">*</span></label>
+                                <input type="text" name= "phone_number" value="{{user.user_mobile}}" pattern="[7-9]{1}[0-9]{9}" title="Phone number with 7 and remaing 9 digit with 0-9 "  class="form-control" placeholder="enter your mobile no" required>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <label class="form-label">Email<span class="text-red">*</span></label>
+                                <input type="text" name= "email" value="{{ user.email}}" class="form-control" placeholder="enter your email" readonly>
+                            </div>
+                        </div>
+
+
+
+                             <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-label">Password<span class="text-red">*</span></label>
+                                <input type="text" name= "password" value="{% if company_detail %}{{company_detail.company_Password}}{% else %}{{hr_detail.password}}{% endif %}" class="form-control"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more character" placeholder="enter your password" required>
+                            </div>
+                        </div>
+                        {% if company_detail %}
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="form-label">Address<span class="text-red">*</span></label>
+                                <input type="text" name= "address" value="{{company_detail.company_address}}" class="form-control" placeholder="address"  required>
+                            </div>
+                        </div>
+                        {% endif %}
+
+
+                    </div>
+                    <div class="btn-list text-end">
+                        <button type="submit" class="btn btn-success cusbtn">UPDATE</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    {% include 'footer.html' %}
+
+    <!-- JQUERY JS -->
+    {% include 'js.html' %}
+    {% block js %}
+    {% endblock %}
+</body>
+</html>

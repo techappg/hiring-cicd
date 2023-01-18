@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static%}
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    {% include 'css_file.html' %}
+</head>
+
+<body class="app sidebar-mini ltr light-mode">
+    <!--Sidebar start-->
+    {% include 'side_bar.html' %}
+
+    <div class="page-header">
+       <h1 class="page-title">Ques in Sample Paper</h1>
+       <div>
+          <ol class="breadcrumb">
+             <li class="breadcrumb-item"><a href="/dashboard_index">Home</a></li>
+             <li class="breadcrumb-item active" aria-current="page">Sample Paper</li>
+          </ol>
+       </div>
+    </div>
+
+                    <div class="main-container container-fluid">
+
+
+
+                                        <div class="col-sm-6 col-md-6">
+
+
+
+                                                <div class="form-group">
+                                                    <label class="form-label">uuid <span class="text-red"></span></label>
+                                                    <input type="text" value="{{c.public_url}}" name="name" class="form-control" readonly>
+                                                </div>
+
+                                          </div>
+
+
+                                        <div class="col-sm-6 col-md-6">
+
+
+
+                                                <div class="form-group">
+                                                     <label class="form-label">Duration<span class="text-red"></span></label>
+                                                    <input type="text" value="{{c.duration}}" name="name" class="form-control" readonly>
+                                                </div>
+
+                                          </div>
+                                        <div class="col-sm-6 col-md-6">
+
+
+
+                                                <div class="form-group">
+                                                    <label class="form-label">Title<span class="text-red"></span></label>
+                                                    <input type="text" value="{{c.title}}" name="name" class="form-control" readonly>
+                                                </div>
+
+                                        </div>
+
+                                       <div class="col-sm-6 col-md-6">
+
+
+                                                <div class="form-group">
+                                                    {% for i in  all_ques %}
+<!--                                                    <label class="form-label">Question<span class="text-red"></span></label>-->
+                                                    <p>{{i.ques|safe}}</p>
+
+<!--                                                    <label class="form-label">Answer<span class="text-red"></span></label>-->
+<!--                                                    <input type="text" value="" name="name" class="form-control" >-->
+
+                                                    {% endfor %}
+                                                </div>
+
+
+                                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+{% include 'footer.html' %}
+
+    <!-- JQUERY JS -->
+    {% include 'js.html' %}
+    {% block js %}
+    {% endblock %}
+</body>
+</html>

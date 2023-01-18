@@ -1,0 +1,82 @@
+
+<!DOCTYPE html>
+<html lang="en">
+{% load static%}
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    {% include 'css_file.html' %}
+</head>
+
+<body class="app sidebar-mini ltr light-mode">
+    <!--Sidebar start-->
+    {% include 'side_bar.html' %}
+
+    <div class="page-header">
+       <h1 class="page-title">Hr Record</h1>
+       <div>
+          <ol class="breadcrumb">
+             <li class="breadcrumb-item"><a href="/dashboard_index">Home</a></li>
+             <li class="breadcrumb-item active" aria-current="page">HR Details</li>
+          </ol>
+       </div>
+    </div>
+{% if hr_updated %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+  <button type="button" class="btn-close " data-bs-dismiss="alert" aria-label="Close"><i class="bi bi-x-octagon-fill"></i></button>
+</div>
+    {% endif %}
+    <div class="main-container">
+        <div class="card">
+            <div class="card-header justify-content-between">
+                <h3 class="card-title">All Hr Record</h3>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table mb-3 border text-nowrap text-md-nowrap table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Sr. no</th>
+                                <th>Hr Name</th>
+                                <th>Hr Mail</th>
+                                <th>phone_no</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tbody>
+                                {% for hr_record in hr_record%}
+                                    <tr>
+                                        <td>{{forloop.counter}}</td>
+                                        <td>{{hr_record.first_name|title}}</td>
+                                        <td>{{hr_record.email}}</td>
+                                        <td>{{hr_record.phone_no}}</td>
+                                        <td class="btn-list">
+                                            <a href="/hr/{{hr_record.id}}" class="btn btn-primary btn-sm me-2">View</a>
+                                            <a href="/update_hr_details/{{hr_record.id}}" class="btn btn-sm btn-secondary">Update</a>
+                                        </td>
+                                    </tr>
+                                {%endfor%}
+                    {% if not hr_record %}
+                        <tr>
+                            <td colspan="8" class="text-danger"><center>This company has not created any Hr. </center></td></tr>
+                        {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+{% include 'footer.html' %}
+
+    <!-- JQUERY JS -->
+    {% include 'js.html' %}
+    {% block js %}
+    {% endblock %}
+</body>
+</html>
